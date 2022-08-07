@@ -1,0 +1,957 @@
+{%- comment -%}
+
+If you want to show product characteristics. You need to put it in product description (in admin panel, 'Show HTML'):
+
+<div class="product-сharacteristics">
+  <h2 class="product-сharacteristics__title">Characteristics <span>Varmilo Beijing Opera</span>
+</h2>
+  <div class="product-сharacteristics__body">
+    <dl class="characteristics">
+      <!-- duplicate it for more char. -->
+      <div class="characteristics__wrapper">
+        <dt class="characteristics-key">
+          <span>Keyboard type</span> <!-- key -->
+        </dt>
+        <dd class="characteristics-value">
+          <span>Mechanical</span>	<!-- value -->
+        </dd>
+      </div>
+      <!-- duplicate it for more char. -->
+      <div class="characteristics__wrapper">
+        <dt class="characteristics-key">
+          <span>Interface</span> <!-- key -->
+        </dt>
+        <dd class="characteristics-value">
+          <span>USB</span>	<!-- value -->
+        </dd>
+      </div>
+      <!-- duplicate it for more char. -->
+      <div class="characteristics__wrapper">
+        <dt class="characteristics-key">
+          <span>Connecting</span> <!-- key -->
+        </dt>
+        <dd class="characteristics-value">
+          <span>Wired</span>	<!-- value -->
+        </dd>
+      </div>
+      <!-- duplicate it for more char. -->
+      <div class="characteristics__wrapper">
+        <dt class="characteristics-key">
+          <span>Cable length, m</span> <!-- key -->
+        </dt>
+        <dd class="characteristics-value">
+          <span>1.8</span>	<!-- value -->
+        </dd>
+      </div>
+      <!-- duplicate it for more char. -->
+      <div class="characteristics__wrapper">
+        <dt class="characteristics-key">
+          <span>Features</span> <!-- key -->
+        </dt>
+        <dd class="characteristics-value">
+          <span>Skeleton</span>	<!-- value -->
+        </dd>
+      </div>
+      <!-- duplicate it for more char. -->
+      <div class="characteristics__wrapper">
+        <dt class="characteristics-key">
+          <span>Keyboard illumination</span> <!-- key -->
+        </dt>
+        <dd class="characteristics-value">
+          <span>White</span>	<!-- value -->
+        </dd>
+      </div>
+      <!-- duplicate it for more char. -->
+      <div class="characteristics__wrapper">
+        <dt class="characteristics-key">
+          <span>Form</span> <!-- key -->
+        </dt>
+        <dd class="characteristics-value">
+          <span>80%</span>	<!-- value -->
+        </dd>
+      </div>
+      <!-- duplicate it for more char. -->
+      <div class="characteristics__wrapper">
+        <dt class="characteristics-key">
+          <span>Color</span> <!-- key -->
+        </dt>
+        <dd class="characteristics-value">
+          <span>Multicolor</span>	<!-- value -->
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+{%- endcomment -%}
+
+<section id="MainProduct-{{ section.id }}" data-section="{{ section.id }}">
+
+    {{ 'swiper-homemaid.css' | asset_url | stylesheet_tag }}
+
+    <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+    <div class="container pt-0">
+        <div class="row">
+            <div class="col-12 product__header">
+                <!-- breadcrumbs -->
+                {% if section.settings.product_breadcrumbs %}
+                    {% render 'breadcrumbs' %}
+                {% endif %}
+
+                <!-- title -->
+                <h2 class="product__header_title" >{{product.title}}</h2>
+                <div class="d-flex">
+                    <!-- rating -->
+                    {% if section.settings.product_rating %}
+                        {% render 'rating', show_reviews: true %}
+                    {% endif %}
+
+                    <!-- product-available -->
+                    {% if section.settings.product_stock %}
+                        {% if product.available %}
+                            <div class="product-stock_wrapper">
+                                <span class="product-stock product-stock--available">
+                                    {{'products.product.on_sale' | t }}
+                                    <span class="product-stock--icon">{% render 'icon-success' %}</span>
+                                </span>
+                            </div>
+                        {% else %}
+                            <div class="product-stock_wrapper">
+                                <span class="product-stock product-stock--sold-out">
+                                    {{'products.product.sold_out' | t }}
+                                    <span class="product-stock--icon">{% render 'icon-cross', icon_width: '12px', icon_height: '12px' %}</span>
+                                </span>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container container--product">
+        <div class="wrapper--sticky wrapper-sticky--main">
+            <div class="row">
+                <div class="tab-wrapper">
+                    <div class="swiper swiper-tab">
+                        <div class="swiper-wrapper swiper-wrapper__tab">
+                            <div class="swiper-slide tab-slide">
+                                <button class="btn button-tab button-tab--active" id="allAboutProduct">All about product</button>
+                            </div>
+                            <div class="swiper-slide tab-slide">
+                                <button class="btn button-tab" id="characteristics">Characteristics</button>
+                            </div>
+                            <div class="swiper-slide tab-slide">
+                                <button class="btn button-tab" id="reviews">Reviews <span>49</span></button>
+                            </div>
+                            <div class="swiper-slide tab-slide">
+                                <button class="btn button-tab" id="questions">Questions <span>23</span></button>
+                            </div>
+                            <div class="swiper-slide tab-slide">
+                                <button class="btn button-tab" id="gallery">Gallery <span>{{ product.media.size }}</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-section tab-section--active padding-x-sm" id="allAboutProduct">
+            <div class="row gx-5 row--product">
+
+                <div class="col-12 col-lg-8 col-sm-12 product_media">
+                    <!-- Slider main container -->
+                        <div class="swiper swiper-media border--radius">
+                            <!-- Additional required wrapper -->
+                            <div class="swiper-wrapper">
+                            <!-- Slides -->
+                            {% for media in product.media %}
+                                <div class="swiper-slide {% if section.settings.zoom_product_media %} zoom-container {% endif %}">
+                                    <img src="{{ media.image | img_url: 'master' }}" class="swiper-media__image d-block w-100 border--radius" alt="{{ media.alt }}">
+                                </div>
+                            {% endfor %}
+
+                            </div>
+
+                            <!-- If we need navigation buttons -->
+                            <div class="swiper-button-prev--media button--click-effect">
+                                <span class="icon__arrow-prev arrow--prev arrow--center arrow--shadow icon__arrow">
+                                    {% render 'icon-arrow', arrow_color: 'FECA2F', arrow_prev: true %}
+                                </span>
+                            </div>
+                            <div class="swiper-button-next--media button--click-effect">
+                                <span class="icon__arrow-next arrow--next arrow--center arrow--shadow icon__arrow">
+                                    {% render 'icon-arrow', arrow_color: 'FECA2F' %}
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <!-- Slider thumbs container -->
+                        <div class="swiper swiper-thumbs">
+                            <!-- Additional required wrapper -->
+                            <div class="swiper-wrapper">
+                            <!-- Slides -->
+                            {% for media in product.media %}
+                                <div class="swiper-slide border--radius overflow-hidden">
+                                    <img src="{{ media.image | img_url: 'master' }}" class="d-block w-100 swiper-thumbs__image" alt="{{ media.alt }}">
+                                </div>
+                            {% endfor %}
+                            </div>
+                        </div>
+
+                </div>
+                <div class="col-12 col-lg-4 col-sm-12 product_order">
+                    <div class="product_order-wrapper">
+                        {% if product.variants.size > 1 %}
+                            <div class="variant-selector">
+                                <h4 class="variant-selector_title">Color: <span>{{ product.selected_or_first_available_variant.title }}</span></h4>
+
+                                <div class="variant-selector__wrapper">
+                                    {% for variant in product.variants %}
+                                        <label class="variant-selector--option">
+                                            <input class="variant-selector--input"
+                                            type="radio" name="product-variant"
+                                            variant-name="{{ variant.title }}"
+                                            id="{{ variant.id }}"
+                                            value="{{ variant.id }}"
+                                            {% if variant == product.variants[0] %} checked {% endif %}
+                                            {% unless variant.available %} disabled {% endunless %}>
+                                            <span class="variant-selector--{{ variant.title | downcase}}" tabindex="0" data-bs-toggle="popover" data-bs-custom-class="variant-selector--popover" data-bs-trigger="hover focus" data-bs-placement="bottom" data-bs-content="{{ variant.title }}"></span>
+                                        </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="divider"></div>
+                        {% endif %}
+                        <span class="favorite__button--product-order icon__favorite_light favorite__button" tabindex="0" data-bs-toggle="popover" data-bs-custom-class="variant-selector--popover" data-bs-trigger="hover focus" data-bs-placement="bottom" data-bs-content="Add to favorite">
+                            {% render 'icon-favorite' %}
+                        </span>
+
+
+                        <h3 class="product-price">
+                            {{ product.price | money_with_currency }}
+                        </h3>
+                        {% if product.available %}
+                        <!-- form -->
+                        <product-form class="product-form">
+                        {%- form form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                            <input id="current-variant" type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled>
+                            <input type="hidden" name="quantity" value="1">
+
+                            <div class="product-form__buttons">
+                                <button id="buyNow"
+                                        class="btn button-homemaid"
+                                        >
+                                    <span class="button-homemaid__icon">
+                                        {% render 'icon-cart-homemaid' %}
+                                    </span>
+                                    Buy it now
+                                </button>
+                                <button type="submit"
+                                        name="add"
+                                        class="btn button-homemaid btn--pink"
+                                        >
+                                    {{ 'products.product.add_to_cart' | t }}
+                                    <div class="loading-overlay__spinner hidden">
+                                        <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                                        <circle class="btn-circle path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                                        </svg>
+                                    </div>
+                                </button>
+                            </div>
+                        {%- endform -%}
+                        </product-form>
+                        <!-- form -->
+                        {% else %}
+                            <button class="btn button-homemaid"
+                                    disabled
+                                    >
+                                <span class="button-homemaid__icon">
+                                    {% render 'icon-stop', icon_color: 'A9A9A9' %}
+                                </span>
+                                Product out of stock
+                            </button>
+                        {% endif %}
+
+                        <div class="divider"></div>
+
+                        <div class="selling-info">
+                            <div class="selling-info__card">
+                                <span class="card-icon">
+                                    {% render 'icon-credit-card', icon_color: 'EE6262' %}
+                                </span>
+                                <span class="card-text">Accept online payment!</span>
+                            </div>
+                            <div tabindex="0" data-bs-toggle="popover" data-bs-custom-class="variant-selector--popover" data-bs-trigger="hover focus" data-bs-placement="right" data-bs-content="If you order before 12:00"
+                            class="selling-info__card">
+                                <span class="card-icon">
+                                    {% render 'icon-pin', icon_color: 'EE6262' %}
+                                </span>
+                                <span class="card-text">Same day delivery!</span>
+                            </div>
+                            <div class="selling-info__card">
+                                <span class="card-icon">
+                                    {% render 'icon-shield-check', icon_color: 'EE6262' %}
+                                </span>
+                                <span class="card-text">Quality warranty!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row gx-5 mt-5">
+                <div class="col-12 col-lg-8 col-sm-12">
+                    <div class="product-description">
+                        <h2 class="product-description__title">Description <span>{{ product.title }}</span></h2>
+                        <div class="product-description__body">
+                            {{product.description}}
+                        </div>
+                    </div>
+
+                    <div class="product-reviews__button">
+                        <button id="characteristics" type="button" class="btn button-tab-section button-homemaid btn--dark">
+                            View detailed specifications <span class="btn--arrow-next">{% render 'icon-arrow', arrow_color: 'F8F8F8', arrow_stroke_width: true %}</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-sm-12">
+                    <div class="product-reviews">
+                        <div class="product-reviews__header">
+                            <h3 class="product-reviews__title">Reviews <span>43</span></h3>
+                            <button class="btn button-homemaid">Write a review</button>
+                        </div>
+                        <div class="product-reviews__reviews-block">
+                            {%- assign customers_reviews = 'Nelly Estrada-Henley Regan-Steven Pike-Rose Ferrell-Luka Marsh' | split: '-' -%}
+                            {% for customer in customers_reviews limit: 5 %}
+                                <div class="reviews-card">
+                                    <div class="card-body">
+                                        <p class="review-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+                                        <h6 class="review-text review-text--title">Positive:</h6>
+                                        <p class="review-text">Very good typing!</p>
+
+                                        <h6 class="review-text review-text--title">Negative:</h6>
+                                        <p class="review-text">Noting ;)</p>
+
+                                        <div class="review-rating">
+                                            {% render 'rating', rating: 4 %}
+                                        </div>
+                                        <div class="review-customer">
+                                            {{ customer }}, 26 december 2022
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="product-reviews__button">
+                            <button id="reviews" type="button" class="btn button-tab-section button-homemaid btn--dark">
+                                Watch all reviews <span class="btn--arrow-next">{% render 'icon-arrow', arrow_color: 'F8F8F8', arrow_stroke_width: true %}</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-section padding-x-sm" id="characteristics">
+            <div class="row gx-5 row--product">
+                <div class="col-12 col-lg-8 col-sm-12">
+                    <div class="product-description">
+                        <h2 class="product-description__title">Description <span>{{ product.title }}</span></h2>
+                        <div class="product-description__body">
+                            {{product.description}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 col-sm-12">
+                    <div class="wrapper--sticky wrapper--sticky--padding wrapper--sticky-md-margin">
+                        {% render 'product-order', product: product %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-section padding-x-sm" id="reviews">
+            <div class="row gx-5 row--product">
+                <div class="col-12 col-lg-8 col-sm-12">
+                    <div class="product-reviews">
+                        <div class="product-reviews__header">
+                            <h3 class="product-reviews__title">Reviews <span>43</span></h3>
+                            <button class="btn button-homemaid">Write a review</button>
+                        </div>
+                        <div class="product-reviews__reviews-block product-reviews__block">
+                            {%- assign customers_reviews = 'Nelly Estrada-Henley Regan-Steven Pike-Rose Ferrell-Luka Marsh' | split: '-' -%}
+                            {% for customer in customers_reviews %}
+                                <div class="reviews-card">
+                                    <div class="card-body">
+                                        <p class="review-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+                                        <h6 class="review-text review-text--title">Positive:</h6>
+                                        <p class="review-text">Very good typing!</p>
+
+                                        <h6 class="review-text review-text--title">Negative:</h6>
+                                        <p class="review-text">Noting ;)</p>
+
+                                        <div class="review-rating">
+                                            {% render 'rating', rating: 4 %}
+                                        </div>
+                                        <div class="review-customer">
+                                            {{ customer }}, 26 december 2022
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="product__show-more">
+                            <button id="showMoreReviews" class="btn button-homemaid">Show more</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 col-sm-12">
+                    <div class="wrapper--sticky wrapper--sticky--padding wrapper--sticky-md-margin">
+                        {% render 'product-order', product: product %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-section padding-x-sm" id="questions">
+            <div class="row gx-5 row--product">
+                <div class="col-12 col-lg-8 col-sm-12">
+                    <div class="product-reviews">
+                        <div class="product-reviews__header">
+                            <h3 class="product-reviews__title">Questions <span>23</span></h3>
+                            <button class="btn button-homemaid">Write a question</button>
+                        </div>
+                        <div class="product-reviews__reviews-block product-question__block">
+                            {%- assign customers_reviews = 'Nelly Estrada-Henley Regan-Steven Pike-Rose Ferrell-Luka Marsh' | split: '-' -%}
+                            {% for customer in customers_reviews %}
+                                <div class="reviews-card">
+                                    <div class="card-body">
+                                        <p class="review-text">Trump officials tried to add a citizenship question to the 2020 census in a move experts said would benefit Republicans despite initial doubts among some in the administration that it was legal, according to an investigative report released Wednesday by a congressional oversight committee.</p>
+
+                                        <div class="review-customer">
+                                            {{ customer }}, 26 december 2022
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="product__show-more">
+                            <button id="showMoreQuestions" class="btn button-homemaid">Show more</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 col-sm-12">
+                    <div class="wrapper--sticky wrapper--sticky--padding wrapper--sticky-md-margin">
+                        {% render 'product-order', product: product %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-section padding-x-sm" id="gallery">
+            <div class="row gx-5 row--product">
+                <div class="col-12 col-lg-8 col-sm-12">
+                    <div class="product-gallery">
+                        <div class="product-reviews__header">
+                            <h3 class="product-reviews__title">Gallery <span>{{ product.media.size }}</span></h3>
+                        </div>
+                        <div class="product-gallery__block">
+                            {% for media in product.media %}
+                                <div class="gallery-image__wrapper product-order-image {% if section.settings.zoom_product_gallery %}zoom-container{% endif %}">
+                                    <img src="{{ media.image | img_url: 'master' }}" class="gallery-image img-zoom" alt="{{ media.alt }}">
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 col-sm-12">
+                    <div class="wrapper--sticky wrapper--sticky--padding wrapper--sticky-md-margin">
+                        {% render 'product-order', product: product %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ 'js-image-zoom.js' | asset_url }}"></script>
+
+    <script>
+
+        let tabs = document.querySelectorAll('.button-tab')
+        let tabSections = document.querySelectorAll('.tab-section')
+        let tabButtons = document.querySelectorAll('.button-tab-section')
+
+        tabs.forEach((item) => {
+            item.addEventListener('click', () => {
+                tabSections.forEach((tabSection) => {
+                    if (tabSection.getAttribute('id') == item.getAttribute('id') && !tabSection.classList.contains('tab-section--active')) {
+                        document.querySelector('.tab-section--active').classList.remove('tab-section--active')
+                        tabSection.classList.add('tab-section--active')
+                        scroll({ top: 70, behavior: 'smooth' })
+
+                        document.querySelector('.button-tab--active').classList.remove('button-tab--active')
+                        item.classList.add('button-tab--active')
+                    }
+                })
+            })
+        })
+
+        tabButtons.forEach((item) => {
+            item.addEventListener('click', () => {
+                tabSections.forEach((tabSection) => {
+                    if (tabSection.getAttribute('id') == item.getAttribute('id') && !tabSection.classList.contains('tab-section--active')) {
+                        document.querySelector('.tab-section--active').classList.remove('tab-section--active')
+                        tabSection.classList.add('tab-section--active')
+
+                        scroll({ top: 70, behavior: 'smooth' })
+
+                        tabs.forEach((tab) => {
+                            if (tab.getAttribute('id') == item.getAttribute('id')) {
+                                document.querySelector('.button-tab--active').classList.remove('button-tab--active')
+                                tab.classList.add('button-tab--active')
+                            }
+                        })
+                    }
+                })
+            })
+        })
+
+        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+
+        const thumbsSwiperMedia = new Swiper('.swiper-thumbs', {
+            spaceBetween: 10,
+            slidesPerView: 4,
+            freeMode: true,
+            watchSlidesProgress: true,
+
+            breakpoints: {
+                // when window width is >= 320px
+                320: {
+                    slidesPerView: 2,
+                },
+                // when window width is >= 768px
+                768: {
+                    slidesPerView: 3,
+                },
+                // when window width is >= 992px
+                992: {
+                    slidesPerView: 3,
+                },
+                // when window width is >= 1200px
+                1200: {
+                    slidesPerView: 4,
+                }
+            },
+        });
+
+        const swiperMedia = new Swiper('.swiper-media', {
+            speed: 600,
+            spaceBetween: 100,
+            loadOnTransitionStart: true,
+
+            keyboard: {
+                enabled: true,
+            },
+
+            mousewheel: {
+                invert: false,
+            },
+
+            navigation: {
+                nextEl: '.swiper-button-next--media',
+                prevEl: '.swiper-button-prev--media',
+            },
+
+            thumbs: {
+                swiper: thumbsSwiperMedia,
+            },
+        });
+
+        const swiperTab = new Swiper('.swiper-tab', {
+            speed: 100,
+            spaceBetween: 10,
+            slidesPerView: 5,
+            enabled: false,
+
+            breakpoints: {
+                // when window width is >= 768px
+                0: {
+                    slidesPerView: 2,
+                    enabled: true,
+                },
+                992: {
+                    slidesPerView: 5,
+                }
+            }
+        });
+
+
+        //buy button
+        let form = document.querySelector('form[action="/cart/add"]');
+
+        let btnBuy = form.querySelector('#buyNow');
+        btnBuy.onclick = e => {
+            let variantId = form.querySelector('input[name="id"]').value
+            let quantity = form.querySelector('input[name="quantity"]').value;
+
+            let host = window.location.hostname;
+            let newurl = `//${host}/cart/${variantId}:${quantity}`
+            window.location.href = newurl;
+
+            return false
+        }
+
+        let variantSelectorTitle = document.querySelectorAll('.variant-selector_title')
+        document.querySelectorAll('input').forEach( element => {
+            element.onchange = e => {
+                if (element.getAttribute('name') == 'product-variant') {
+                    variantSelectorTitle.forEach(title => title.querySelector('span').innerHTML = element.getAttribute('variant-name'))
+                    let currentVariantId = document.querySelectorAll('#current-variant')
+                    currentVariantId.forEach(item => item.setAttribute('value', element.getAttribute('value')))
+                }
+            }
+        })
+
+        // image zoom
+        window.addEventListener('load', () => {
+            let zoomImage = document.querySelectorAll('.zoom-container')
+
+            let zoomOptions = {
+                fillContainer: true,
+                zoomPosition: 'top',
+            }
+
+            zoomImage.forEach(item => {
+                new ImageZoom(item, zoomOptions);
+            })
+        })
+
+        // show more (questions)
+
+        let questionsObject = [
+            {
+                text: 'Trump officials tried to add a citizenship question to the 2020 census in a move experts said would benefit Republicans despite initial doubts among some in the administration that it was legal, according to an investigative report released Wednesday by a congressional oversight committee.',
+                customer: 'Nelly Estrada',
+                date: '26 december 2021'
+            },
+            {
+                text: 'Trump officials tried to add a citizenship question to the 2020 census in a move experts said would benefit Republicans despite initial doubts among some in the administration that it was legal, according to an investigative report released Wednesday by a congressional oversight committee.',
+                customer: 'Tilly Driscoll',
+                date: '7 july 2021'
+            },
+            {
+                text: 'Trump officials tried to add a citizenship question to the 2020 census in a move experts said would benefit Republicans despite initial doubts among some in the administration that it was legal, according to an investigative report released Wednesday by a congressional oversight committee.',
+                customer: 'Kiara Dodson',
+                date: '26 december 2021'
+            },
+            {
+                text: 'Trump officials tried to add a citizenship question to the 2020 census in a move experts said would benefit Republicans despite initial doubts among some in the administration that it was legal, according to an investigative report released Wednesday by a congressional oversight committee.',
+                customer: 'Onur Bostock',
+                date: '26 december 2021'
+            },
+            {
+                text: 'Trump officials tried to add a citizenship question to the 2020 census in a move experts said would benefit Republicans despite initial doubts among some in the administration that it was legal, according to an investigative report released Wednesday by a congressional oversight committee.',
+                customer: 'Lori Bellamy',
+                date: '26 december 2021'
+            },
+            {
+                text: 'Trump officials tried to add a citizenship question to the 2020 census in a move experts said would benefit Republicans despite initial doubts among some in the administration that it was legal, according to an investigative report released Wednesday by a congressional oversight committee.',
+                customer: 'Tessa Childs',
+                date: '26 december 2021'
+            },
+            {
+                text: 'Trump officials tried to add a citizenship question to the 2020 census in a move experts said would benefit Republicans despite initial doubts among some in the administration that it was legal, according to an investigative report released Wednesday by a congressional oversight committee.',
+                customer: 'Reegan Coles',
+                date: '26 december 2021'
+            },
+            {
+                text: 'Trump officials tried to add a citizenship question to the 2020 census in a move experts said would benefit Republicans despite initial doubts among some in the administration that it was legal, according to an investigative report released Wednesday by a congressional oversight committee.',
+                customer: 'Maisie Hawes',
+                date: '26 december 2021'
+            },
+            {
+                text: 'Trump officials tried to add a citizenship question to the 2020 census in a move experts said would benefit Republicans despite initial doubts among some in the administration that it was legal, according to an investigative report released Wednesday by a congressional oversight committee.',
+                customer: 'Avery Shepherd',
+                date: '26 december 2021'
+            },
+            {
+                text: 'Trump officials tried to add a citizenship question to the 2020 census in a move experts said would benefit Republicans despite initial doubts among some in the administration that it was legal, according to an investigative report released Wednesday by a congressional oversight committee.',
+                customer: 'Avery Shepherd',
+                date: '26 december 2021'
+            },
+        ]
+
+        // show more function
+        let questionBlock = document.querySelector('.product-question__block')
+        let showMoreQuestionsButton = document.querySelector('#showMoreQuestions')
+        let howMoreQuestions = parseInt('{{ section.settings.questions_load }}', 10)
+        let countQuestions = parseInt('{{ section.settings.questions_load }}', 10)
+        let offsetQuestion = 0
+
+        showMoreQuestionsButton.addEventListener('click', () => {
+            if (offsetQuestion < questionsObject.length) {
+
+                for (let i = offsetQuestion; i <= countQuestions-1; i++) {
+                    if (questionsObject[i] != undefined) {
+                        // create elements
+                        let questionCard = document.createElement('div')
+                        let cardBody = document.createElement('div')
+                        let questionText = document.createElement('p')
+                        let questionCustomer = document.createElement('div')
+
+                        // add classes
+                        questionCard.className = 'reviews-card'
+                        cardBody.className = 'card-body'
+                        questionText.className = 'review-text'
+                        questionCustomer.classList = 'review-customer'
+
+                        // add text
+                        questionText.textContent = questionsObject[i].text
+                        questionCustomer.textContent = `${questionsObject[i].customer}, ${questionsObject[i].date}`
+
+                        // build element
+                        questionCard.append(cardBody)
+                        cardBody.prepend(questionText)
+                        cardBody.append(questionCustomer)
+
+                        questionBlock.append(questionCard)
+                    }
+                }
+            }
+
+            if (countQuestions >= questionsObject.length) {
+                countQuestions = questionsObject.length
+            } else {
+                countQuestions += howMoreQuestions
+            }
+
+            offsetQuestion += howMoreQuestions
+        })
+
+        // show more (reviews)
+
+        let reviewsObject = [
+            {
+                text: 'Trump officials tried to add a citizenship question to the 2020 census in a move experts said would benefit Republicans despite initial doubts among some in the administration that it was legal, according to an investigative report released Wednesday by a congressional oversight committee.',
+                positive: 'Good typing!',
+                negative: null,
+                customer: 'Roxy Mcleod',
+                rating: 5,
+                date: '26 december 2021'
+            },
+            {
+                text: 'Trump officials tried to add a citizenship question to the 2020 census in a move experts said would benefit Republicans despite initial doubts among some in the administration that it was legal, according to an investigative report released Wednesday by a congressional oversight committee.',
+                positive: 'Good typing!',
+                customer: 'Dillon Blackmore',
+                rating: 5,
+                date: '26 december 2021'
+            },
+            {
+                text: 'Trump officials tried to add a citizenship question to the 2020 census in a move experts said would benefit Republicans despite initial doubts among some in the administration that it was legal, according to an investigative report released Wednesday by a congressional oversight committee.',
+                negative: 'Nothing ;)',
+                customer: 'Hibah Kearney',
+                rating: 2.3,
+                date: '26 december 2021'
+            },
+            {
+                text: 'Trump officials tried to add a citizenship question to the 2020 census in a move experts said would benefit Republicans despite initial doubts among some in the administration that it was legal, according to an investigative report released Wednesday by a congressional oversight committee.',
+                positive: null,
+                negative: 'Nothing ;)',
+                customer: 'Ashlyn Briggs',
+                rating: 5,
+                date: '26 december 2021'
+            },
+            {
+                text: 'Trump officials tried to add a citizenship question to the 2020 census in a move experts said would benefit Republicans despite initial doubts among some in the administration that it was legal, according to an investigative report released Wednesday by a congressional oversight committee.',
+                customer: 'Jana Rosa',
+                rating: 4.6,
+                date: '26 december 2021'
+            },
+            {
+                text: 'Trump officials tried to add a citizenship question to the 2020 census in a move experts said would benefit Republicans despite initial doubts among some in the administration that it was legal, according to an investigative report released Wednesday by a congressional oversight committee.',
+                positive: 'Good typing!',
+                negative: 'Nothing ;)',
+                customer: 'Nyah Brock',
+                rating: 5,
+                date: '26 december 2021'
+            },
+            {
+                text: 'Trump officials tried to add a citizenship question to the 2020 census in a move experts said would benefit Republicans despite initial doubts among some in the administration that it was legal, according to an investigative report released Wednesday by a congressional oversight committee.',
+                positive: 'Good typing!',
+                negative: 'Nothing ;)',
+                customer: 'Zidane Waller',
+                rating: 3,
+                date: '26 december 2021'
+            },
+            {
+                text: 'Trump officials tried to add a citizenship question to the 2020 census in a move experts said would benefit Republicans despite initial doubts among some in the administration that it was legal, according to an investigative report released Wednesday by a congressional oversight committee.',
+                positive: 'Good typing!',
+                negative: 'Nothing ;)',
+                customer: 'Phillipa Compton',
+                rating: 4,
+                date: '26 december 2021'
+            },
+            {
+                text: 'Trump officials tried to add a citizenship question to the 2020 census in a move experts said would benefit Republicans despite initial doubts among some in the administration that it was legal, according to an investigative report released Wednesday by a congressional oversight committee.',
+                positive: 'Good typing!',
+                negative: 'Nothing ;)',
+                customer: 'Aiesha Lim',
+                rating: 1,
+                date: '26 december 2021'
+            },
+        ]
+
+        // show more function
+        let reviewBlock = document.querySelector('.product-reviews__block')
+        let showMoreReviewsButton = document.querySelector('#showMoreReviews')
+        let howMoreReviews = parseInt('{{ section.settings.reviews_load }}', 10)
+        let countReviews = parseInt('{{ section.settings.reviews_load }}', 10)
+        let offsetReviews = 0
+
+        showMoreReviewsButton.addEventListener('click', () => {
+            if (offsetReviews < reviewsObject.length) {
+
+                for (let i = offsetReviews; i <= countReviews-1; i++) {
+                    if (reviewsObject[i] != undefined) {
+                        // create elements
+                        let reviewsCard = document.createElement('div')
+                        let cardBody = document.createElement('div')
+                        let reviewsText = document.createElement('p')
+
+                        let reviewsPositive = document.createElement('h6')
+                        let reviewsPositiveText = document.createElement('p')
+                        let reviewsNegative = document.createElement('h6')
+                        let reviewsNegativeText = document.createElement('p')
+                        let reviewsRating = document.querySelector('.review-rating').cloneNode(true)
+
+                        let reviewsCustomer = document.createElement('div')
+
+                        // add classes
+                        reviewsCard.className = 'reviews-card'
+                        cardBody.className = 'card-body'
+                        reviewsText.className = 'review-text'
+
+                        reviewsPositive.className = 'review-text review-text--title'
+                        reviewsPositiveText.className = 'review-text'
+                        reviewsNegative.className = 'review-text review-text--title'
+                        reviewsNegativeText.className = 'review-text'
+
+                        reviewsCustomer.classList = 'review-customer'
+
+                        // add text
+                        reviewsText.textContent = reviewsObject[i].text
+                        reviewsPositive.textContent = 'Positive:'
+                        reviewsPositiveText.textContent = (reviewsObject[i].positive) ? reviewsObject[i].positive : '...'
+                        reviewsNegative.textContent = 'Negative:'
+                        reviewsNegativeText.textContent = (reviewsObject[i].negative) ? reviewsObject[i].negative : '...'
+                        reviewsRating.querySelector('.active').style.setProperty('--rating', `${reviewsObject[i].rating}`)
+                        reviewsCustomer.textContent = `${reviewsObject[i].customer}, ${reviewsObject[i].date}`
+
+                        // build element
+                        reviewsCard.append(cardBody)
+                        cardBody.append(reviewsText)
+                        cardBody.append(reviewsPositive)
+                        cardBody.append(reviewsPositiveText)
+                        cardBody.append(reviewsNegative)
+                        cardBody.append(reviewsNegativeText)
+                        cardBody.append(reviewsRating)
+                        cardBody.append(reviewsCustomer)
+
+                        reviewBlock.append(reviewsCard)
+                    }
+                }
+            }
+
+            countReviews = (countReviews >= reviewsObject.length) ? reviewsObject.length : countReviews + howMoreReviews
+
+            offsetReviews += howMoreReviews
+        })
+    </script>
+
+</section>
+
+
+{% schema %}
+    {
+        "name": "Homemaid product",
+        "settings": [
+            {
+                "id": "zoom_product_media",
+                "default": false,
+                "type": "checkbox",
+                "label": "Zoom image in slider on hover"
+            },
+            {
+                "id": "product_breadcrumbs",
+                "default": true,
+                "type": "checkbox",
+                "label": "Show breadcrumbs"
+            },
+            {
+                "id": "product_stock",
+                "default": true,
+                "type": "checkbox",
+                "label": "Show 'is stock'"
+            },
+            {
+                "id": "product_rating",
+                "default": true,
+                "type": "checkbox",
+                "label": "Show rating",
+                "info": "Shopify doesn`t include this function. Add some rating app for this."
+            },
+            {
+                "id": "product_style",
+                "default": true,
+                "type": "checkbox",
+                "label": "Show style.",
+                "info": "Works only if styles more that one."
+            },
+            {
+                "type": "header",
+                "content": "Reviews settings"
+            },
+            {
+                "id": "reviews_load",
+                "default": 5,
+                "type": "range",
+                "min": 1,
+                "max": 10,
+                "step": 1,
+                "label": "Max reviews load.",
+                "info": "Choice max reviews load in one time"
+            },
+            {
+                "type": "header",
+                "content": "Question settings"
+            },
+            {
+                "id": "questions_load",
+                "default": 5,
+                "type": "range",
+                "min": 1,
+                "max": 10,
+                "step": 1,
+                "label": "Max questions load.",
+                "info": "Choice max questions load in one time"
+            },
+            {
+                "type": "header",
+                "content": "Gallery settings"
+            },
+            {
+                "id": "zoom_product_gallery",
+                "default": true,
+                "type": "checkbox",
+                "label": "Zoom image in gallery on hover"
+            }
+        ]
+    }
+{% endschema %}

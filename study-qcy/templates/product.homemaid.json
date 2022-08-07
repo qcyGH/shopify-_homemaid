@@ -1,0 +1,12 @@
+{
+    "sections": {
+
+        "main": {
+            "type": "main-homemaid-product"
+        },
+        "recommendations": {
+            "type": "product-recommendations-slider"
+        }
+    },
+    "order": ["main", "recommendations"]
+}

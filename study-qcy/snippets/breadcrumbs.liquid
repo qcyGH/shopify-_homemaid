@@ -1,0 +1,74 @@
+{% unless template == 'index' or template == 'cart' or template == 'list-collections' %}
+<nav class="breadcrumb m-0" role="navigation" aria-label="breadcrumbs">
+  <a class="text-decoration-none breadcrumbs__home" href="/" title="Home">
+    <span class="breadcrumbs__home--icon">{% render 'icon-home' %}</span>
+  </a>
+  {% if template contains 'page' %}
+    <span class="breadcrumbs__arrow" aria-hidden="true">
+        {% render 'icon-arrow', arrow_color: 'A9A9A9', arrow_stroke_width: true, arrow_width: 5, arrow_height: 10 %}
+    </span>
+    <span>{{ page.title }}</span>
+  <!-- product -->
+  {% elsif template contains 'product' %}
+    {% for collection in collections %}
+      {% if product.collections contains collection  %}
+        <span class="breadcrumbs__arrow" aria-hidden="true">
+          {% render 'icon-arrow', arrow_color: 'A9A9A9', arrow_stroke_width: true, arrow_width: 5, arrow_height: 10 %}
+        </span>
+        <div class="breadcrumbs__link--wrapper">
+          <a class="breadcrumbs__link" href="{{collection.url}}" title="{{collection.title}}">{{collection.title}}</a>
+        </div>
+      {% endif %}
+    {% endfor %}
+    <span class="breadcrumbs__arrow product-link" aria-hidden="true">
+        {% render 'icon-arrow', arrow_color: 'A9A9A9', arrow_stroke_width: true, arrow_width: 5, arrow_height: 10 %}
+    </span>
+    <div class="breadcrumbs__link--wrapper product-link">
+      <a class="breadcrumbs__link" href="{{product.url}}" title="{{product.title}}">{{product.title}}</a>
+    </div>
+  <!-- product -->
+  {% elsif template contains 'collection' and collection.handle %}
+    <span class="breadcrumbs__arrow" aria-hidden="true">
+        {% render 'icon-arrow', arrow_color: 'A9A9A9', arrow_stroke_width: true, arrow_width: 5, arrow_height: 10 %}
+    </span>
+    {% if current_tags %}
+      {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+      {{ collection.title | link_to: url }}
+      <span class="breadcrumbs__arrow" aria-hidden="true">
+        {% render 'icon-arrow', arrow_color: 'A9A9A9', arrow_stroke_width: true, arrow_width: 5, arrow_height: 10 %}
+      </span>
+      <span>{{ current_tags | join: " + " }}</span>
+    {% else %}
+      <span>{{ collection.title }}</span>
+    {% endif %}
+  {% elsif template == 'blog' %}
+    <span class="breadcrumbs__arrow" aria-hidden="true">
+        {% render 'icon-arrow', arrow_color: 'A9A9A9', arrow_stroke_width: true, arrow_width: 5, arrow_height: 10 %}
+    </span>
+    {% if current_tags %}
+      {{ blog.title | link_to: blog.url }}
+      <span class="breadcrumbs__arrow" aria-hidden="true">
+        {% render 'icon-arrow', arrow_color: 'A9A9A9', arrow_stroke_width: true, arrow_width: 5, arrow_height: 10 %}
+      </span>
+      <span>{{ current_tags | join: " + " }}</span>
+    {% else %}
+    <span>{{ blog.title }}</span>
+    {% endif %}
+  {% elsif template == 'article' %}
+    <span class="breadcrumbs__arrow" aria-hidden="true">
+        {% render 'icon-arrow', arrow_color: 'A9A9A9', arrow_stroke_width: true, arrow_width: 5, arrow_height: 10 %}
+    </span>
+    {{ blog.title | link_to: blog.url }}
+    <span class="breadcrumbs__arrow" aria-hidden="true">
+        {% render 'icon-arrow', arrow_color: 'A9A9A9', arrow_stroke_width: true, arrow_width: 5, arrow_height: 10 %}
+    </span>
+    <span>{{ article.title }}</span>
+  {% else %}
+   <span class="breadcrumbs__arrow" aria-hidden="true">
+        {% render 'icon-arrow', arrow_color: 'A9A9A9', arrow_stroke_width: true, arrow_width: 5, arrow_height: 10 %}
+    </span>
+   <span>{{ page_title }}</span>
+  {% endif %}
+</nav>
+
+{% endunless %}

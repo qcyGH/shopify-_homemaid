@@ -1,0 +1,76 @@
+<div class="product_order-wrapper">
+    <div class="product-order-image">
+        <img src="{{ product.featured_media | img_url: 'master' }}" alt="{{ product.title }}">
+    </div>
+
+    <div class="product-order-title">
+        <span>{{ product.title }}</span>
+    </div>
+
+    {% if product.variants.size > 1 %}
+        <div class="variant-selector">
+            <h4 class="variant-selector_title">Color: <span>{{ product.selected_or_first_available_variant.title }}</span></h4>
+
+            <div class="variant-selector__wrapper">
+                {% for variant in product.variants %}
+                    <label class="variant-selector--option">
+                        <input class="variant-selector--input"
+                        type="radio" name="product-variant"
+                        variant-name="{{ variant.title }}"
+                        id="{{ variant.id }}"
+                        value="{{ variant.id }}"
+                        {% if variant == product.variants[0] %} checked {% endif %}
+                        {% unless variant.available %} disabled {% endunless %}>
+                        <span class="variant-selector--{{ variant.title | downcase}}" tabindex="0" data-bs-toggle="popover" data-bs-custom-class="variant-selector--popover" data-bs-trigger="hover focus" data-bs-placement="bottom" data-bs-content="{{ variant.title }}"></span>
+                    </label>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="divider"></div>
+    {% endif %}
+
+    <h3 class="product-price">
+        {{ product.price | money_with_currency }}
+    </h3>
+    {% if product.available %}
+    <!-- form -->
+    <product-form class="product-form">
+    {%- form form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+        <input id="current-variant" type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled>
+        <input type="hidden" name="quantity" value="1">
+
+        <div class="product-form__buttons">
+            <button id="buyNow"
+                    class="btn button-homemaid"
+                    >
+                <span class="button-homemaid__icon">
+                    {% render 'icon-cart-homemaid' %}
+                </span>
+                Buy it now
+            </button>
+            <button type="submit"
+                    name="add"
+                    class="btn button-homemaid btn--pink"
+                    >
+                {{ 'products.product.add_to_cart' | t }}
+                <div class="loading-overlay__spinner hidden">
+                    <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="btn-circle path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                    </svg>
+                </div>
+            </button>
+        </div>
+    {%- endform -%}
+    </product-form>
+    <!-- form -->
+    {% else %}
+        <button class="btn button-homemaid"
+                disabled
+                >
+            <span class="button-homemaid__icon">
+                {% render 'icon-stop', icon_color: 'A9A9A9' %}
+            </span>
+            Product out of stock
+        </button>
+    {% endif %}
+</div>

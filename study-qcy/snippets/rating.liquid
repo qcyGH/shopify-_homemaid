@@ -1,0 +1,29 @@
+<div class="card__rating">
+    <div class="card__rating_stars">
+      <div class="active"
+      {% if rating %}
+        {% if rating > 5 %} {% assign rating = 5 %} {% endif %}
+        {% if rating < 1 %} {% assign rating = 1 %} {% endif %}
+        style="--rating: {{ rating }}"
+      {% else%}
+        style="--rating: 3.5"
+      {% endif %}
+        aria-label="Rating of this product is 3.5 out of 5">
+        <div class="active__inner">
+          <span class="icon__star_active">{% render 'icon-star-active' %}</span>
+          <span class="icon__star_active">{% render 'icon-star-active' %}</span>
+          <span class="icon__star_active">{% render 'icon-star-active' %}</span>
+          <span class="icon__star_active">{% render 'icon-star-active' %}</span>
+          <span class="icon__star_active">{% render 'icon-star-active' %}</span>
+        </div>
+      </div>
+      <span class="icon__star">{% render 'icon-star' %}</span>
+      <span class="icon__star">{% render 'icon-star' %}</span>
+      <span class="icon__star">{% render 'icon-star' %}</span>
+      <span class="icon__star">{% render 'icon-star' %}</span>
+      <span class="icon__star">{% render 'icon-star' %}</span>
+    </div>
+    {% if show_reviews %}
+        <small class="card__rating_reviews">8 reviews</small>
+    {% endif %}
+</div>

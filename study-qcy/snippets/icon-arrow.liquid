@@ -1,0 +1,30 @@
+<svg
+{% if arrow_width %}
+    width="{{ arrow_width }}"
+{% else %}
+    width="8"
+{% endif %}
+{% if arrow_height %}
+    height="{{ arrow_height }}"
+{% else %}
+    height="14"
+{% endif %}
+viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+        {% if arrow_prev %}
+            d="M7 1L0.999998 7L7 13"
+        {% else %}
+            d="M1 1L7 7L1 13"
+        {% endif %}
+
+        {% if arrow_color %}
+            stroke="#{{ arrow_color }}"
+        {% else %}
+            stroke="#090909"
+        {% endif %}
+
+    stroke-linecap="round" stroke-linejoin="round"
+
+        {% if arrow_stroke_width %} stroke-width="1.1px" {% endif %}
+    />
+</svg>

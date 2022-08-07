@@ -1,0 +1,15 @@
+{
+    "sections": {
+
+        "main": {
+            "type": "main-bootstrap-product"
+        },
+        "recommendations": {
+            "type": "product-recommendations-slider"
+        },
+        "same-products": {
+            "type": "product-same"
+        }
+    },
+    "order": ["main", "same-products", "recommendations"]
+}

@@ -1,0 +1,224 @@
+<section id="MainProduct-{{ section.id }}" data-section="{{ section.id }}">
+
+    <div class="container pt-4">
+        <div class="row">
+            <div class="col-12 col-lg-8 col-sm-12">
+                <!-- media-carousel -->
+                <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-bs-touch="true" data-bs-interval="false">
+                    <div class="carousel-indicators">
+                        {%- assign bs_slide = 0 -%}
+                        {% for media in product.media %}
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{% increment bs_slide %}" {% if media.image == product.featured_media %} class="active" aria-current="true" {% endif %} aria-label="{{ media.alt }}"></button>
+                        {% endfor %}
+                    </div>
+                    <div class="carousel-inner rounded-4">
+                        {% for media in product.media %}
+                            <div class="carousel-item {% if media.image == product.featured_media %} active {% endif %}">
+                                <img src="{{ media.image | img_url: 'master' }}" class="d-block w-100 rounded-4" alt="{{ media.alt }}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+            </div>
+            <div class="col-12 col-lg-4 col-sm-12 mt-4">
+                <div class="d-flex flex-column shadow h-100 p-3 px-4 rounded-4 border border-opacity-10 rounded-2 bg-light">
+                    <!-- breadcrumbs -->
+                    {% if section.settings.product_breadcrumbs %}
+                        {% render 'breadcrumbs' %}
+                    {% endif %}
+                    <!-- title -->
+                    <h2 class="fw-semibold pt-2" style="font-size: 4rem;">{{product.title}}</h2>
+                    <!-- rating -->
+                    {% if section.settings.product_rating %}
+                      <h4 class="fs-2">⭐⭐⭐⭐⭐</h4>
+                    {% endif %}
+                    <!-- product-available -->
+                    {% if section.settings.product_stock %}
+                        {% if product.available %}
+                            <div>
+                                <span class="text-success bg-success bg-opacity-10 rounded-3 h-100 d-inline-block px-4"><span class="pe-1">&#10004;</span> {{'products.product.on_sale' | t }}</span>
+                            </div>
+                        {% else %}
+                        <div>
+                            <span class="text-danger bg-danger bg-opacity-10 rounded-3 h-100 d-inline-block px-4"><span class="pe-1">&#215;</span> {{'products.product.sold_out' | t }}</span>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+                    <!-- price -->
+                    {% if product.compare_at_price %}
+                        <h4 class="mb-0 pt-4 fs-4 text-muted text-decoration-line-through">{{product.compare_at_price | money_with_currency}}</h4>
+                    {% endif%}
+                        <h3 class="mb-0 {% unless product.compare_at_price %} pt-4 {% endunless %} pt-2 fs-2">{{product.price | money_with_currency}}</h3>
+                    {% if section.settings.product_tax %}
+                        <p class="mb-4 pt-2 pe-3">{{'products.product.include_taxes' | t}}</p>
+                    {% endif%}
+                    <!-- price -->
+
+                    <!-- form -->
+                    {% form 'product', product, id: product_form_id, class: 'mt-auto' %}
+                        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled>
+                        <div class="divider w-100 bg-dark opacity-25 d-block mb-3" style="height: 1px;"></div>
+                        <div class="product__options d-flex mb-2">
+                            <!-- product-style -->
+                            {% if section.settings.product_style and product.has_only_default_variant != true %}
+                                <div class="product-form_style">
+                                    <label class="form__label">
+                                        Style
+                                    </label>
+
+                                    <select class="form-select text-truncate" name="id" style="height: 4rem; font-size: 1.7rem;">
+                                        {% for variant in product.variants %}
+                                        <option value="{{ variant.id }}"
+                                            {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+                                        >
+                                            {{ variant.title }} - {{ variant.price | money }}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            {% endif %}
+
+                            <!-- product-quantity -->
+                            {% if section.settings.product_quantity %}
+                                <div class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %} ms-3" {{ block.shopify_attributes }}>
+                                    <label class="form__label" for="Quantity-{{ section.id }}">
+                                    {{ 'products.product.quantity.label' | t }}
+                                    </label>
+
+                                    <quantity-input class="quantity" style="width: 12rem; min-height: 4rem;">
+                                    <button class="quantity__button no-js-hidden" name="minus" type="button">
+                                        <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}</span>
+                                        {% render 'icon-minus' %}
+                                    </button>
+                                    <input class="quantity__input"
+                                        type="number"
+                                        name="quantity"
+                                        min="1"
+                                        max="{{ section.settings.quantity_range }}"
+                                        value="1"
+                                        >
+                                    <button class="quantity__button no-js-hidden" name="plus" type="button">
+                                        <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: product.title | escape }}</span>
+                                        {% render 'icon-plus' %}
+                                    </button>
+                                    </quantity-input>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-success btn-lg my-3 p-3"
+                                style="--bs-btn-font-size: 2rem; width: 100%"
+                                >
+                            {{ 'products.product.add_to_cart' | t }}
+                        </button>
+                    {% endform %}
+                    <!-- form -->
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12 col-lg-8 col-sm-12">
+            <h2 class="fs-2 ps-1">Description</h2>
+            <div class="p-3">
+                <p class="accordion-body">{{product.description}}</p>
+            </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-sm-12">
+                <div class="product__reviews">
+                    <h3 class="product_reviews_title fs-2">Reviews <span class="text-muted">43</span></h3>
+                    <div class="product__reviews_items mt-4">
+                        {%- assign customers_reviews = 'Nelly Estrada-Henley Regan-Steven Pike-Rose Ferrell-Luka Marsh' | split: '-' -%}
+                        {% for customer in customers_reviews %}
+                            <div class="reviews__card card text-bg-success shadow rounded-4 border-opacity-10 mb-4">
+                                <div class="card-header customer-name fs-3">{{ customer }}</div>
+                                <div class="card-body">
+                                    <h5 class="card-title fs-4 text-white">Style: <span class="text-muted fw-semibold">{{ product.first_available_variant.title }}</span></h5>
+                                    <div class="card-rating fs-3 mt-2"><span class="fs-4">Rating:</span> ⭐⭐⭐⭐⭐</div>
+                                    <p class="card-text review-text fs-3 mt-2">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+                                    <h6 class="fw-bold fs-4 mt-2 mb-1">Positive:</h6>
+                                    <p class="card-text fs-3 m-0">Very good typing!</p>
+
+                                    <h6 class="fw-bold fs-4 mt-2 mb-1">Negative:</h6>
+                                    <p class="card-text fs-3 m-0">Noting ;)</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-dark shadow rounded-4 fs-3 ms-auto px-5">
+                                Watch all reviews <span class="fs-2 fw-semibold ms-2 text-success">></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+{% schema %}
+    {
+        "name": "Bootstrap product",
+        "settings": [
+            {
+                "id": "product_breadcrumbs",
+                "default": true,
+                "type": "checkbox",
+                "label": "Show breadcrumbs"
+            },
+            {
+                "id": "product_stock",
+                "default": true,
+                "type": "checkbox",
+                "label": "Show 'is stock'"
+            },
+            {
+                "id": "product_rating",
+                "default": false,
+                "type": "checkbox",
+                "label": "Show rating",
+                "info": "Shopify doesn`t include this function. Add some rating app for this."
+            },
+            {
+                "id": "product_tax",
+                "type": "checkbox",
+                "label": "Show 'Tax included.'"
+            },
+            {
+                "id": "product_style",
+                "default": true,
+                "type": "checkbox",
+                "label": "Show style.",
+                "info": "Works only if styles more that one."
+            },
+            {
+                "id": "product_quantity",
+                "default": true,
+                "type": "checkbox",
+                "label": "Show quantity"
+            },
+            {
+                "id": "quantity_range",
+                "default": 1,
+                "type": "range",
+                "min": 1,
+                "max": 30,
+                "step": 1,
+                "label": "Quantity range.",
+                "info": "Choice max quantity."
+            }
+        ]
+    }
+{% endschema %}
