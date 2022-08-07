@@ -10,6 +10,9 @@
 - [ ] search page
 - [ ] cart page
 - [ ] collection page
+- [ ] dark theme
+- [ ] more options
+- [ ] clean code
 
 
 ### Product page
