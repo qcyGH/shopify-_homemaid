@@ -9,7 +9,7 @@
 - [X] home page
 - [ ] search page
 - [ ] cart page
-- [ ] collection products page
+- [X] collection products page
 - [ ] сollections page
 - [ ] dark theme
 - [ ] more options
