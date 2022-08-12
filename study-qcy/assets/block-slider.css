@@ -208,6 +208,21 @@
     color: #F8F8F8 !important;
 }
 
+@media screen and (min-width: 992px) {
+
+
+    .swiper-block__buttons_wrapper > *,
+    .swiper-block-pagination {
+        opacity: 0;
+        transition: opacity ease .4s;
+    }
+
+    .swiper-block:hover .swiper-block__buttons_wrapper > *,
+    .swiper-block:hover .swiper-block-pagination {
+        opacity: 1;
+    }
+}
+
 @media screen and (min-width: 320px) and (max-width: 768px) {
 
     .swiper-block__buttons_wrapper {
