@@ -9,8 +9,8 @@
 - [X] home page
 - [ ] search page
 - [ ] cart page
-- [X] collection products page
-- [ ] сollections page
+- [ ] collection products page
+- [X] сollections page
 - [ ] dark theme
 - [ ] more options
 - [ ] clean code
