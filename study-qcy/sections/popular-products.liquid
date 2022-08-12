@@ -1,0 +1,71 @@
+<section class="featured-products">
+
+  {{ 'slider-horizontal.css' | asset_url | stylesheet_tag }}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="featured-products__container">
+          <div class="featured-products__title">
+            <h3 class="featured-products__title-text">{{ section.settings.section_label }}</h3>
+          </div>
+            <div class="featured-products__wrapper">
+            {% for product in collections['all'].products limit: section.settings.max_products_range %}
+              {% render 'product-card',
+               product: product,
+               show_second_image: section.settings.show_second_image,
+               show_rating: section.settings.show_card_rating
+               %}
+            {% endfor %}
+            </div>
+            <div class="featured-products__link-wrapper">
+              <a class="featured-products__link" href="{{ collections['all'].url }}" target="_blank" rel="noopener noreferrer">More products</a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Popular products",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+            {
+              "id": "section_label",
+              "default": "Featured products",
+              "type": "text",
+              "label": "Label text"
+            },
+            {
+              "type": "header",
+              "content": "Card settings"
+            },
+            {
+              "id": "show_second_image",
+              "default": true,
+              "type": "checkbox",
+              "label": "Show secondary image while hover."
+            },
+            {
+              "id": "show_card_rating",
+              "default": true,
+              "type": "checkbox",
+              "label": "Show rating in card."
+            },
+            {
+              "id": "max_products_range",
+              "default": 4,
+              "type": "range",
+              "min": 4,
+              "max": 16,
+              "step": 4,
+              "label": "Max product range.",
+              "info": "Choice max products."
+            }
+        ]
+}
+{% endschema %}

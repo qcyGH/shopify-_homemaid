@@ -1,0 +1,216 @@
+.swiper-block {
+    width: 100%;
+    max-height: 100%;
+    height: 600px;
+    border-radius: 10px;
+    -webkit-filter: drop-shadow(0 -1px 30px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 -1px 30px rgba(0, 0, 0, 0.2));
+    padding: 0 !important;
+    margin-top: 16px !important;
+}
+
+.swiper-block__inner {
+    width: 100%;
+    z-index: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 100%;
+    color: #F8F8F8 !important;
+    padding-bottom: 170px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.swiper-block__slide_wrapper {
+    height: 100%
+}
+
+.swiper-block__image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.swiper-block__image img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.swiper-block__image::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(26, 26, 26, 0.2);
+}
+
+.swiper-block-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 0 !important;
+    -webkit-transition: .2s;
+    transition: .2s;
+    margin-bottom: 32px;
+    position: absolute !important;
+    z-index: 1;
+}
+
+.swiper-pagination-bullet {
+    background: #F8F8F8;
+    opacity: .5;
+    -webkit-transition: width .2s;
+    transition: width .2s;
+    border-radius: 1rem;
+    width: 12px;
+    height: 12px;
+    text-align: center;
+}
+
+.swiper-button-disabled {
+    background-color: #303030;
+    opacity: 80%;
+    cursor: default;
+}
+
+.swiper-button-disabled:hover,
+.swiper-button-disabled:active {
+    box-shadow: inset 0 0 0 #000;
+}
+
+.button--click-effect:hover {
+    box-shadow: inset 0px -2px 1px #000;
+}
+
+.button--click-effect:active {
+    box-shadow: inset 0px -4px 1px #000;
+}
+
+.swiper-block-button-next,
+.swiper-block-button-prev {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+	position: absolute !important;
+	top: 50%;
+	background-color: #222;
+	border-radius: 100%;
+	width: 3rem !important;
+	height: 3rem !important;
+	transition: all ease-in-out .2s;
+	margin-top: calc(0px - (var(--swiper-navigation-size)/ 2));
+	z-index: 10;
+	cursor: pointer;
+}
+
+.swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet,
+.swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+    margin: 0 8px;
+}
+
+.swiper-block-pagination {
+    width: max-content !important;
+    left: 50% !important;
+    transform: translate(-50%);
+}
+
+.swiper-block-pagination::before {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 50%;
+    height: calc(100% + 10px);
+    width: 100%;
+    transform: translate(-50%, -50%);
+    background: var(--dark-4);
+    border-radius: 10px;
+    z-index: -1;
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    width: 32px;
+    background: #E18668;
+}
+
+.swiper-block__buttons_wrapper {
+    position: relative;
+    height: 600px;
+    bottom: 600px;
+}
+
+.swiper-block-button-prev {
+-webkit-transition: .2s;
+    transition: .2s;
+    left: 0;
+}
+
+.swiper-block-button-prev:hover {
+    -webkit-filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+.swiper-block-button-next {
+    -webkit-transition: .2s;
+    transition: .2s;
+    right: 0;
+}
+
+.swiper-block-button-next:hover {
+    -webkit-filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+.swiper-block__content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    z-index: 99;
+}
+
+.content__title {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 48px;
+    line-height: 65px;
+    letter-spacing: 0.12em;
+    margin-bottom: 8px;
+    color: #F8F8F8 !important;
+}
+
+.content__text {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    opacity: .9;
+    margin-bottom: 32px;
+    color: #F8F8F8 !important;
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+
+    .swiper-block__buttons_wrapper {
+        opacity: 0;
+    }
+}

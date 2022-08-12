@@ -1,0 +1,133 @@
+{{ 'block-slider.css' | asset_url | stylesheet_tag }}
+
+<div class="swiper swiper-block">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      {% for block in section.blocks %}
+        <div class="swiper-slide swiper-block-slide">
+          <div class="container swiper-block__slide_wrapper">
+            <div class="swiper__inner swiper-block__inner">
+              <div class="swiper-block__image">
+                {{ block.settings.image | image_url: width: master | image_tag:
+                  loading: 'lazy',
+                  alt: block.settings.image.alt | escape
+                }}
+              </div>
+              <div class="swiper-block__content">
+                <h2 class="content__title">{{ block.settings.slide_title }}</h2>
+                <div class="content__text">{{ block.settings.slide_text }}</div>
+                <a href="{{ block.settings.button_url }}" class="btn button-homemaid" target="_blank" rel="noopener noreferrer">
+                  {{ block.settings.button_text }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-block-pagination"></div>
+
+    <!-- If we need navigation buttons -->
+    <div class="container swiper-block__buttons_wrapper">
+      <div class="swiper-button-prev button--click-effect swiper-block-button-prev">
+        {% render 'icon-arrow', arrow_prev: true, arrow_color: 'f8f8f8' %}
+      </div>
+      <div class="swiper-button-next button--click-effect swiper-block-button-next">
+        {% render 'icon-arrow', arrow_color: 'f8f8f8' %}
+      </div>
+    </div>
+  </div>
+
+<script>
+    const swiper = new Swiper(".swiper-block", {
+        // Optional parameters
+        direction: "horizontal",
+        loop: true,
+        speed: 1000,
+        loadOnTransitionStart: true,
+
+        autoplay: {
+            delay: 5000,
+            pauseOnMouseEnter: true,
+            disableOnInteraction: false
+        },
+
+        keyboard: {
+            enabled: true,
+        },
+
+        mousewheel: {
+            invert: true,
+        },
+
+        // If we need pagination
+        pagination: {
+            el: ".swiper-block-pagination",
+            clickable: true,
+        },
+
+        // Navigation arrows
+        navigation: {
+            nextEl: ".swiper-block-button-next",
+            prevEl: ".swiper-block-button-prev",
+        },
+
+    });
+</script>
+
+{% schema %}
+{
+  "name": "Block slider",
+  "tag": "section",
+  "class": "section section-block-slider",
+  "limit": 1,
+  "blocks": [
+     {
+       "name": "Slide",
+       "type": "slide",
+       "settings": [
+         {
+           "type": "image_picker",
+           "id": "image",
+           "label": "Background image"
+         },
+         {
+          "type": "text",
+          "id": "slide_title",
+          "label": "Slide title"
+         },
+         {
+          "type": "text",
+          "id": "slide_text",
+          "label": "Slide text"
+         },
+         {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button label"
+         },
+         {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button url (redirect)"
+         }
+       ]
+     }
+  ],
+  "presets": [
+    {
+      "name": "Block slider",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

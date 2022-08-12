@@ -1,0 +1,78 @@
+<section class="featured-products">
+
+    {{ 'slider-horizontal.css' | asset_url | stylesheet_tag }}
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="featured-products__container">
+              <div class="featured-products__wrapper">
+
+              {% render 'collection-card', collection: section.settings.collection %}
+
+              {% for product in section.settings.collection.products limit: section.settings.max_products_range %}
+                {% render 'product-card',
+                 product: product,
+                 show_second_image: section.settings.show_second_image,
+                 show_rating: section.settings.show_card_rating
+                 %}
+              {% endfor %}
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+{% schema %}
+{
+  "name":"Collection products",
+  "tag":"section",
+  "class":"section",
+  "settings":[
+    {
+      "type":"collection",
+      "id":"collection",
+      "label":"t:sections.featured-collection.settings.collection.label"
+    },
+    {
+      "type":"header",
+      "content":"Card settings"
+    },
+    {
+      "id":"show_second_image",
+      "default":true,
+      "type":"checkbox",
+      "label":"Show secondary image while hover."
+    },
+    {
+      "id":"show_card_rating",
+      "default":true,
+      "type":"checkbox",
+      "label":"Show rating in card."
+    },
+    {
+      "id":"max_products_range",
+      "default":7,
+      "type":"range",
+      "min":3,
+      "max":16,
+      "step":1,
+      "label":"Max product range.",
+      "info":"Choice max products to show."
+    }
+  ],
+  "presets":[
+    {
+      "name":"Collection products",
+      "settings":{
+        "collection":"all",
+        "show_second_image":true,
+        "show_card_rating":true,
+        "max_products_range":7
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,10 @@
+<div class="collection-card">
+    <div class="collection-card__wrapper">
+    <a class="collection-card__image" href="{{ collection.url }}" target="_blank" rel="noopener noreferrer">
+        <img src="{{ collection.featured_image | img_url: 'master' }}">
+    </a>
+    <a href="{{ collection.url }}" class="collection-card__title" target="_blank" rel="noopener noreferrer">
+        {{ collection.title }}
+    </a>
+    </div>
+</div>
