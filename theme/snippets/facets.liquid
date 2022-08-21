@@ -257,9 +257,9 @@
                       data-hide_min_max="true"
                       data-hide_from_to="true"
                       data-min="0"
-                      data-max="{{ filter.range_max | money_without_trailing_zeros | remove: filter_range_max }}"
+                      data-max="{{ filter.range_max | money_without_trailing_zeros | remove: filter_range_max | replace: ',', '' | replace: '.', '' }}"
                       data-from="0"
-                      data-to="{{ filter.range_max | money_without_trailing_zeros | remove: filter_range_max }}"
+                      data-to="{{ filter.range_max | money_without_trailing_zeros | remove: filter_range_max | replace: ',', '' | replace: '.', '' }}"
                     />
 
                     <script>
@@ -613,9 +613,9 @@
                             data-hide_min_max="true"
                             data-hide_from_to="true"
                             data-min="0"
-                            data-max="{{ filter.range_max | money_without_trailing_zeros | remove: filter_range_max }}"
+                            data-max="{{ filter.range_max | money_without_trailing_zeros | remove: filter_range_max | replace: ',', '' | replace: '.', '' }}"
                             data-from="0"
-                            data-to="{{ filter.range_max | money_without_trailing_zeros | remove: filter_range_max }}"
+                            data-to="{{ filter.range_max | money_without_trailing_zeros | remove: filter_range_max | replace: ',', '' | replace: '.', '' }}"
                           />
 
                           <script>
