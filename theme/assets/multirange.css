@@ -1,0 +1,48 @@
+.irs-min,
+.irs-max,
+.irs-max,
+.irs-from,
+.irs-to,
+.irs-single {
+  visibility: hidden !important;
+}
+
+.irs {
+  height: 100%;
+}
+
+.irs--round {
+	height: 16px;
+}
+
+.irs--round .irs-handle {
+	top: 0 !important;
+	width: 16px !important;
+	height: 16px !important;
+	border: none !important;
+	background-color: var(--white);
+	border-radius: 100% !important;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15) !important;
+  transition: box-shadow ease .2s;
+}
+
+.irs--round .irs-handle:hover {
+  background-color: var(--white-1) !important;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2) !important;
+}
+
+.irs--round .irs-bar {
+	top: 50% !important;
+	height: 2px !important;
+	background-color: var(--pastel-1) !important;
+	transform: translateY(-50%);
+}
+
+.irs--round .irs-line {
+  top: 50% !important;
+	height: 2px !important;
+	background-color: var(--gray) !important;
+	transform: translateY(-50%);
+	border-radius: 4px;
+  opacity: 0.6;
+}

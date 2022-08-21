@@ -1,0 +1,56 @@
+{% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+{{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  @media screen and (max-width: 749px) {
+    .collection-hero--with-image .collection-hero__inner {
+      padding-bottom: calc({{ settings.media_shadow_vertical_offset | at_least: 0 }}px + 2rem);
+    }
+  }
+{%- endstyle -%}
+
+<div class="container">
+  <div class="row">
+    <div class="collection__header col-12">
+
+      <div class="header__info">
+        {% if section.settings.breadcrumbs %}
+          {% render 'breadcrumbs' %}
+        {% endif %}
+        <h2 class="collection__header_title">{{collection.title | escape}}</h2>
+      </div>
+
+      {%- if section.settings.show_collection_image and collection.image -%}
+        <div class="collection-header__image-wrapper">
+          <div class="collection-header__image">
+              <img
+                src="{{ collection.image | img_url: 'grande' }}"
+                alt="{{ collection.description }}"
+              >
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-collection-banner.name",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "breadcrumbs",
+      "default": true,
+      "label": "Show breadcrumbs"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_image",
+      "default": false,
+      "label": "Show collection image"
+    }
+  ]
+}
+{% endschema %}

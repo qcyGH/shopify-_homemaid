@@ -52,6 +52,7 @@ class FacetFiltersForm extends HTMLElement {
     });
 
     if (updateURLHash) FacetFiltersForm.updateURLHash(searchParams);
+
   }
 
   static renderSectionFromFetch(url, event) {
@@ -78,14 +79,70 @@ class FacetFiltersForm extends HTMLElement {
   }
 
   static renderProductCount(html) {
-    const count = new DOMParser().parseFromString(html, 'text/html').getElementById('ProductCount').innerHTML
-    const container = document.getElementById('ProductCount');
-    const containerDesktop = document.getElementById('ProductCountDesktop');
-    container.innerHTML = count;
-    container.classList.remove('loading');
-    if (containerDesktop) {
-      containerDesktop.innerHTML = count;
-      containerDesktop.classList.remove('loading');
+    // const count = new DOMParser().parseFromString(html, 'text/html').getElementById('ProductCount').innerHTML
+    // const container = document.getElementById('ProductCount');
+    // const containerDesktop = document.getElementById('ProductCountDesktop');
+    // container.innerHTML = count;
+    // container.classList.remove('loading');
+    // if (containerDesktop) {
+    //   containerDesktop.innerHTML = count;
+    //   containerDesktop.classList.remove('loading');
+    // }
+
+    rangeInputFrom = document.querySelector('#Filter-Price-GTE')
+    rangeInputTo = document.querySelector('#Filter-Price-LTE')
+
+    $(".js-range-slider").ionRangeSlider({
+      onChange: function (data) {
+        rangeInputFrom.value = data.from
+        rangeInputTo.value = data.to
+
+        rangeInputFrom.setAttribute('value', data.from)
+        rangeInputTo.setAttribute('value', data.to)
+      },
+      onFinish: function(data) {
+        document.querySelector('#FacetFiltersForm').dispatchEvent(new Event('submit'))
+      }
+    });
+
+    if (rangeSlider != undefined) {
+      rangeSlider.update({
+        from: document.querySelector('#Filter-Price-GTE').valueAsNumber,
+        to: document.querySelector('#Filter-Price-LTE').valueAsNumber
+      })
+    } else {
+      $(".js-range-slider").data("ionRangeSlider").update({
+        from: document.querySelector('#Filter-Price-GTE').valueAsNumber,
+        to: document.querySelector('#Filter-Price-LTE').valueAsNumber
+      })
+    }
+
+    mobileRangeInputFrom = document.querySelector('#Mobile-Filter-Price-GTE')
+    mobileRangeInputTo = document.querySelector('#Mobile-Filter-Price-LTE')
+
+    $(".js-mobile-range-slider").ionRangeSlider({
+      onChange: function (data) {
+        mobileRangeInputFrom.value = data.from
+        mobileRangeInputTo.value = data.to
+
+        mobileRangeInputFrom.setAttribute('value', data.from)
+        mobileRangeInputTo.setAttribute('value', data.to)
+      },
+      onFinish: function(data) {
+        document.querySelector('#FacetFiltersFormMobile').dispatchEvent(new Event('submit'))
+      }
+    });
+
+    if (mobileRangeSlider != undefined) {
+      mobileRangeSlider.update({
+        from: document.querySelector('#Mobile-Filter-Price-GTE').valueAsNumber,
+        to: document.querySelector('#Mobile-Filter-Price-LTE').valueAsNumber
+      })
+    } else {
+      $(".js-mobile-range-slider").data("ionRangeSlider").update({
+        from: document.querySelector('#Mobile-Filter-Price-GTE').valueAsNumber,
+        to: document.querySelector('#Mobile-Filter-Price-LTE').valueAsNumber
+      })
     }
   }
 
@@ -259,6 +316,7 @@ class FacetRemove extends HTMLElement {
     event.preventDefault();
     const form = this.closest('facet-filters-form') || document.querySelector('facet-filters-form');
     form.onActiveFilterClick(event);
+    console.log(form)
   }
 }
 
