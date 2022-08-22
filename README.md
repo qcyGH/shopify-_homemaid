@@ -18,19 +18,19 @@
 
 ### Home page
 
-![Home page](https://live.staticflickr.com/65535/52280464021_bd3daa37bc_o.png "Home page")
+![Home page](https://live.staticflickr.com/65535/52280464021_cf28fcb978_o.png "Home page")
 
 ### Product page
 
-![Product page](https://live.staticflickr.com/65535/52269114513_256f90e182_o.png "Product page")
+![Product page](https://live.staticflickr.com/65535/52269114513_41a52299e4_o.png "Product page")
 
 ### Collections page
 
-![Collections page](https://live.staticflickr.com/65535/52281496210_72e2ffbf24_o.png "Collections page")
+![Collections page](https://live.staticflickr.com/65535/52281496210_682f54a5c7_o.png "Collections page")
 
 ### Products page
 
-![Products page](https://live.staticflickr.com/65535/52300721576_da357c22be_o.png "Products page")
+![Products page](https://live.staticflickr.com/65535/52300721576_7885bc8065_o.png "Products page")
 
 ### Search page
 
