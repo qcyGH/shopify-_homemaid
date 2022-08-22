@@ -7,7 +7,7 @@
 - [X] recommendation slider
 - [X] footer 
 - [X] home page
-- [ ] search page
+- [X] search page
 - [ ] cart page
 - [X] collection products page
 - [X] сollections page
@@ -35,3 +35,8 @@
 > На скриншоте цвет заднего фона не полностью прогрузился. На самом сайте такого нету, цвет тянется вдоль всей страницы.
 
 ![Products page](https://live.staticflickr.com/65535/52300721576_da357c22be_o.png "Products page")
+
+### Search page
+> На скриншоте цвет заднего фона не полностью прогрузился. На самом сайте такого нету, цвет тянется вдоль всей страницы.
+
+![Search page](https://live.staticflickr.com/65535/52303391284_d847b57b14_o.png "Search page")
