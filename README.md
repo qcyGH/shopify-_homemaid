@@ -8,9 +8,10 @@
 - [X] footer 
 - [X] home page
 - [X] search page
-- [ ] cart page
+- [X] cart page
 - [X] collection products page
 - [X] сollections page
+- [ ] contact page
 - [ ] dark theme
 - [ ] more options
 - [ ] clean code
@@ -35,3 +36,7 @@
 ### Search page
 
 ![Search page](https://live.staticflickr.com/65535/52303391284_d847b57b14_o.png "Search page")
+
+### Cart page
+
+![Cart](https://live.staticflickr.com/65535/52307714086_bc83da13a1_o.png "Cart")
