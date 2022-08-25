@@ -37,7 +37,8 @@ h1,h2,h3,h4,h5,div,p,button,.buy__button{
 .collection__header,
 .template-search__header,
 .cart-items__wrapper,
-.cart-footer__wrapper {
+.cart-footer__wrapper,
+.main-page__wrapper {
     position: relative;
     padding: 16px 0;
     margin-top: 32px !important;
@@ -52,7 +53,8 @@ h1,h2,h3,h4,h5,div,p,button,.buy__button{
 .collection__header::before,
 .template-search__header::before,
 .cart-items__wrapper::before,
-.cart-footer__wrapper:not(.cart-footer__wrapper.is-empty)::before {
+.cart-footer__wrapper:not(.cart-footer__wrapper.is-empty)::before,
+.main-page__wrapper:before {
     content: '';
     position: absolute;
     top: 0;
@@ -1070,20 +1072,24 @@ details[open] .modal-overlay::after {
     z-index: 5;
 }
 
-.field-homemaid input {
+.field-homemaid input,
+.field-homemaid textarea {
     transition: all .3s;
     border-radius: 6px;
 }
 
-.field-homemaid input:focus-visible {
+.field-homemaid input:focus-visible,
+.field-homemaid textarea:focus-visible {
     outline: none !important;
 }
 
-.field-homemaid input:hover {
+.field-homemaid input:hover,
+.field-homemaid textarea:hover {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.field-homemaid input:focus {
+.field-homemaid input:focus,
+.field-homemaid textarea:focus {
     box-shadow: var(--element-drop-shadow);
     border-radius: var(--border-radius);
 }
@@ -2490,6 +2496,30 @@ cart-remove-button {
 cart-remove-button:hover {
     background: var(--white);
     box-shadow: var(--element-drop-shadow);
+}
+
+.contact {
+    background: var(--dark-3);
+    border-radius: var(--border-radius);
+    box-shadow: var(--section-drop-shadow);
+
+    display: flex;
+    justify-content: center;
+}
+
+#ContactForm {
+    max-width: 80rem;
+    width: 100%;
+    min-width: 60%;
+}
+
+.contact__button {
+    display: flex;
+    justify-content: center;
+}
+
+.contact__button button {
+    width: 80%;
 }
 
 @media screen and (min-width: 1100px) {
