@@ -11,7 +11,7 @@
 - [X] cart page
 - [X] collection products page
 - [X] сollections page
-- [ ] contact page
+- [X] contact page
 - [ ] dark theme
 - [ ] more options
 - [ ] clean code
@@ -39,4 +39,8 @@
 
 ### Cart page
 
-![Cart](https://live.staticflickr.com/65535/52307714086_bc83da13a1_o.png "Cart")
+![Cart page](https://live.staticflickr.com/65535/52307714086_bc83da13a1_o.png "Cart page")
+
+### Contact page
+
+![Contact page](https://live.staticflickr.com/65535/52310406739_2ee66909c2_o.png "Contact page")
