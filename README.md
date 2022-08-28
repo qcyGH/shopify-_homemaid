@@ -12,7 +12,7 @@
 - [X] collection products page
 - [X] сollections page
 - [X] contact page
-- [ ] dark theme
+- [X] dark theme
 - [ ] more options
 - [ ] clean code
 
