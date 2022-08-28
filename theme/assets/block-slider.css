@@ -140,7 +140,7 @@
 .swiper-pagination-bullet-active {
     opacity: 1;
     width: 32px;
-    background: #E18668;
+    background: var(--color-base-accent-1);
 }
 
 .swiper-block__buttons_wrapper {

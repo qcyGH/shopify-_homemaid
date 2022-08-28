@@ -1,11 +1,49 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Dawn",
-    "theme_version": "6.0.2",
-    "theme_author": "Shopify",
+    "theme_name": "Home maid",
+    "theme_version": "1.0.0",
+    "theme_author": "Qcy",
     "theme_documentation_url": "https:\/\/help.shopify.com\/manual\/online-store\/themes",
     "theme_support_url": "https:\/\/support.shopify.com\/"
+  },
+  {
+    "name": "Switching theme",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "switching_theme_enable",
+        "default": true,
+        "label": "Enable switching theme"
+      },
+      {
+        "type": "checkbox",
+        "id": "switching_theme_show_reset_button",
+        "default": false,
+        "label": "Show reset button",
+        "info": "If the user manually changes the scheme, it`s setting write to localStorage. Reset button clear this setting."
+      },
+      {
+        "type": "header",
+        "content": "Optional settings"
+      },
+      {
+        "type": "color",
+        "id": "dark_theme_accent_color",
+        "label": "Accent color for dark theme.",
+        "info": "If not pick, the standard accent color of the light theme will be used."
+      },
+      {
+        "type": "color_background",
+        "id": "dark_theme_gradient_color",
+        "label": "Gradient color for dark theme.",
+        "info": "If not pick, the standard gradient color of the light theme will be used."
+      }
+    ]
   },
   {
     "name": "t:settings_schema.colors.name",

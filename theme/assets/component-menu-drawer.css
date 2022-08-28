@@ -124,6 +124,7 @@ details[open].menu-opening > .menu-drawer__submenu {
 }
 
 .menu-drawer__menu-item {
+  color: var(--text-color);
   padding: 1.1rem 3.2rem;
   text-decoration: none;
   font-size: 1.8rem;
@@ -154,12 +155,7 @@ details[open].menu-opening > .menu-drawer__submenu {
 .menu-drawer__close-button:focus,
 .menu-drawer__menu-item:hover,
 .menu-drawer__close-button:hover {
-  color: rgb(var(--color-foreground));
-  background-color: rgba(var(--color-foreground), 0.04);
-}
-
-.menu-drawer__menu-item--active:hover {
-  background-color: rgba(var(--color-foreground), 0.08);
+  color: var(--text-color);
 }
 
 .js .menu-drawer__menu-item .icon-caret,
@@ -226,7 +222,12 @@ details[open].menu-opening > .menu-drawer__submenu {
   padding: 1.2rem;
   margin-left: -1.2rem;
   font-size: 1.4rem;
-  color: rgb(var(--color-foreground));
+  color: var(--text-color);
+}
+
+.menu-drawer__account:hover {
+  color: var(--text-color);
+  opacity: 0.75;
 }
 
 .menu-drawer__account .icon-account {

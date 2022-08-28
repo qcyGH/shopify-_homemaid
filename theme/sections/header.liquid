@@ -115,7 +115,7 @@
 
 <svg xmlns="http://www.w3.org/2000/svg" class="hidden">
   <symbol id="icon-search" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 9.90918C1.5 5.26492 5.26492 1.5 9.90918 1.5C14.5534 1.5 18.3184 5.26492 18.3184 9.90918C18.3184 14.5534 14.5534 18.3184 9.90918 18.3184C5.26492 18.3184 1.5 14.5534 1.5 9.90918ZM9.90918 0C4.43649 0 0 4.43649 0 9.90918C0 15.3819 4.43649 19.8184 9.90918 19.8184C12.3919 19.8184 14.6614 18.9053 16.4001 17.3967L22.7974 23.7939C23.0726 24.0689 23.5187 24.0689 23.7939 23.7939C24.0689 23.5187 24.0689 23.0726 23.7939 22.7974L17.3967 16.4001C18.9053 14.6614 19.8184 12.3919 19.8184 9.90918C19.8184 4.43649 15.3819 0 9.90918 0Z" fill="#090909"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 9.90918C1.5 5.26492 5.26492 1.5 9.90918 1.5C14.5534 1.5 18.3184 5.26492 18.3184 9.90918C18.3184 14.5534 14.5534 18.3184 9.90918 18.3184C5.26492 18.3184 1.5 14.5534 1.5 9.90918ZM9.90918 0C4.43649 0 0 4.43649 0 9.90918C0 15.3819 4.43649 19.8184 9.90918 19.8184C12.3919 19.8184 14.6614 18.9053 16.4001 17.3967L22.7974 23.7939C23.0726 24.0689 23.5187 24.0689 23.7939 23.7939C24.0689 23.5187 24.0689 23.0726 23.7939 22.7974L17.3967 16.4001C18.9053 14.6614 19.8184 12.3919 19.8184 9.90918C19.8184 4.43649 15.3819 0 9.90918 0Z" fill="currentColor"/>
   </symbol>
 
   <symbol id="icon-close" class="icon icon-close" fill="none" viewBox="0 0 18 17">
@@ -202,6 +202,22 @@
                       </ul>
                     </nav>
                     <div class="menu-drawer__utility-links">
+                      {%- if settings.switching_theme_enable -%}
+                        <div class="switch-theme__wrapper switch-theme__wrapper--mobile">
+                          <button type="button" class="btn switch-theme__button">
+                            <span class="theme-icon__light">
+                              {% render 'icon-sun' %}
+                            </span>
+                            <span class="theme-icon__dark">
+                              {% render 'icon-moon' %}
+                            </span>
+                            <span class="switch-theme__text">Change scheme</span>
+                          </button>
+                          {% if settings.switching_theme_show_reset_button %}
+                            <button type="button" class="btn switch-theme__reset" tabindex="0" data-bs-toggle="popover" data-bs-custom-class="variant-selector--popover" data-bs-trigger="hover focus" data-bs-placement="right" data-bs-content="Reset user theme and use os color scheme"></button>
+                          {% endif %}
+                        </div>
+                      {%- endif -%}
                       {%- if shop.customer_accounts_enabled -%}
                         <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="menu-drawer__account link focus-inset h5">
                           {% render 'icon-account' %}
@@ -442,6 +458,26 @@
             </details>
           </details-modal>
 
+          {%- if settings.switching_theme_enable -%}
+            <div class="switch-theme__wrapper {% if section.settings.menu != blank %} small-hide{% endif %}">
+              <button type="button" class="btn switch-theme__button">
+                <span class="theme-icon__light">
+                  {% render 'icon-sun' %}
+                </span>
+                <span class="theme-icon__dark">
+                  {% render 'icon-moon' %}
+                </span>
+              </button>
+              {% if settings.switching_theme_show_reset_button %}
+                <button type="button" class="btn switch-theme__reset" tabindex="0" data-bs-toggle="popover" data-bs-custom-class="variant-selector--popover" data-bs-trigger="hover focus" data-bs-placement="right" data-bs-content="Reset user theme and use os color scheme"></button>
+                <script>
+                  const switcherPopoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+                  const switcherPopoverList = [...switcherPopoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+                </script>
+              {% endif %}
+            </div>
+          {%- endif -%}
+
           {%- if shop.customer_accounts_enabled -%}
             <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}">
               {% render 'icon-account' %}
@@ -461,9 +497,9 @@
             <span class="icon-cart">
               {%- liquid
                 if cart == empty
-                  render 'icon-cart-homemaid', icon_color: "090909"
+                  render 'icon-cart-homemaid'
                 else
-                  render 'icon-cart-homemaid-full', icon_color: "090909"
+                  render 'icon-cart-homemaid-full'
                 endif
               -%}
             </span>
