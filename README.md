@@ -13,9 +13,18 @@
 - [X] сollections page
 - [X] contact page
 - [X] dark theme
+- [X] adaptive
+- [ ] 404 page
+- [ ] user account pages
 - [ ] more options
 - [ ] clean code
 
+
+### Light theme
+![Light theme](https://live.staticflickr.com/65535/52318614397_cdf6ce82b6_k.jpg "Light theme")
+
+### Dark theme
+![Dark theme](https://live.staticflickr.com/65535/52319725568_4b4ac4242b_k.jpg "Dark theme")
 
 ### Home page
 
