@@ -52,7 +52,8 @@ h1,h2,h3,h4,h5,div,p,button,.buy__button{
 .template-search__header,
 .cart-items__wrapper,
 .cart-footer__wrapper,
-.main-page__wrapper {
+.main-page__wrapper,
+.template-404 {
     position: relative;
     padding: 16px 0;
     margin-top: 32px !important;
@@ -68,7 +69,8 @@ h1,h2,h3,h4,h5,div,p,button,.buy__button{
 .template-search__header::before,
 .cart-items__wrapper::before,
 .cart-footer__wrapper:not(.cart-footer__wrapper.is-empty)::before,
-.main-page__wrapper:before {
+.main-page__wrapper:before,
+.template-404:before {
     content: '';
     position: absolute;
     top: 0;
@@ -82,6 +84,15 @@ h1,h2,h3,h4,h5,div,p,button,.buy__button{
     box-shadow: var(--section-drop-shadow);
 
     z-index: -1;
+}
+
+.template-404 .title {
+    color: var(--text-color);
+}
+
+.template-404 p {
+    color: var(--text-color-1);
+    font-size: 24px !important;
 }
 
 .container--product {
@@ -266,7 +277,7 @@ h1,h2,h3,h4,h5,div,p,button,.buy__button{
 }
 
 .product-order-title > span {
-    color: var(--dark);
+    color: var(--text-color);
     font-size: 24px;
     margin-left: 4px;
 }
