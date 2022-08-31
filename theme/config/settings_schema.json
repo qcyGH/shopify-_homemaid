@@ -21,6 +21,23 @@
         "label": "Enable switching theme"
       },
       {
+        "type": "select",
+        "id": "forced_theme",
+        "default": "light-theme",
+        "label": "Forced theme for site.",
+        "info": "Works only when theme switching is disabled.",
+        "options": [
+          {
+            "value": "light-theme",
+            "label": "Light"
+          },
+          {
+            "value": "dark-theme",
+            "label": "Dark"
+          }
+        ]
+      },
+      {
         "type": "checkbox",
         "id": "switching_theme_show_reset_button",
         "default": false,
