@@ -14,8 +14,8 @@
 - [X] contact page
 - [X] dark theme
 - [X] adaptive
-- [ ] 404 page
-- [ ] user account pages
+- [X] 404 page
+- [X] user account pages
 - [ ] more options
 - [ ] clean code
 
