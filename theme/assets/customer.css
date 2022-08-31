@@ -1,7 +1,25 @@
+.customer__title {
+  margin-top: 16px;
+  color: var(--text-color) !important;
+}
+
+.customer__orders {
+  color: var(--text-color) !important;
+  margin-bottom: 16px;
+}
+
+.customer a {
+  color: var(--text-color) !important;
+  text-decoration: none !important;
+}
+
+.customer a:hover {
+  color: var(--text-color-1) !important;
+}
+
 .customer:not(.account):not(.order) {
   margin: 6rem auto 9rem;
   max-width: 33.4rem;
-  padding: 0 1.5rem;
   text-align: center;
 }
 
@@ -32,7 +50,7 @@
 
 .customer strong {
   font-weight: normal;
-  color: rgb(var(--color-foreground));
+  color: var(--text-color-1);
 }
 
 .customer h2.form__message {
@@ -58,17 +76,12 @@
   table-layout: auto;
   border-collapse: collapse;
   border-bottom: 0.01rem solid rgba(var(--color-foreground), 0.08);
-  box-shadow: none;
+  box-shadow: var(--element-drop-shadow);
   width: 100%;
   font-size: 1.6rem;
   position: relative;
-}
-
-@media screen and (min-width: 750px) {
-  .customer table {
-    border: none;
-    box-shadow: 0 0 0 0.1rem rgba(var(--color-foreground), 0.08);
-  }
+  border-radius: var(--border-radius);
+  overflow: hidden;
 }
 
 @media screen and (forced-colors: active) {
@@ -79,7 +92,17 @@
 }
 
 .customer tbody {
-  color: rgb(var(--color-foreground));
+  color: var(--text-color);
+}
+
+.customer thead {
+  color: var(--text-color-1);
+  border-radius: 10px 0 0 10px;
+  background: var(--background-color-1);
+}
+
+.customer tfoot {
+  color: var(--text-color);
 }
 
 .customer th,
@@ -340,6 +363,7 @@
 
 .login p {
   margin: 1.5rem 0;
+  color: var(--text-color-1);
 }
 
 .login h3 {
@@ -379,13 +403,6 @@
   margin-bottom: 0;
 }
 
-.activate button[name='decline'],
-.addresses li > button,
-.addresses form button[type] {
-  background-color: rgba(var(--color-background), var(--alpha-button-background));
-  color: rgb(var(--color-link));
-}
-
 @media only screen and (min-width: 750px) {
   .activate button[name='decline'] {
     margin-top: inherit;
@@ -394,17 +411,6 @@
 }
 
 /* Account/Order */
-:is(.account, .order) {
-  margin: 6rem auto 9rem;
-  max-width: var(--page-width);
-  padding: 0 2rem;
-}
-
-@media screen and (min-width: 750px) {
-  :is(.account, .order) {
-    padding: 0 5rem;
-  }
-}
 
 @media screen and (min-width: 990px) {
   :is(.account, .order) > div:nth-of-type(2) {
@@ -645,24 +651,9 @@
 }
 
 /* Addresses */
-.addresses li > button {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-}
-
-.addresses li > button + button,
-.addresses form button + button {
-  margin-top: 0rem;
-}
-
-@media screen and (min-width: 750px) {
-  .addresses li > button:first-of-type {
-    margin-top: 3rem;
-  }
-}
 
 .addresses form button:first-of-type {
-  margin-right: 1rem;
+  margin-right: 2rem;
 }
 
 label[for='AddressCountryNew'],
@@ -718,6 +709,7 @@ li[data-address] > h2 {
 
 .addresses ul p {
   margin-bottom: 0;
+  color: var(--text-color);
 }
 
 .addresses input[type='checkbox'] {

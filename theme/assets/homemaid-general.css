@@ -53,7 +53,8 @@ h1,h2,h3,h4,h5,div,p,button,.buy__button{
 .cart-items__wrapper,
 .cart-footer__wrapper,
 .main-page__wrapper,
-.template-404 {
+.template-404,
+.customer {
     position: relative;
     padding: 16px 0;
     margin-top: 32px !important;
@@ -70,7 +71,8 @@ h1,h2,h3,h4,h5,div,p,button,.buy__button{
 .cart-items__wrapper::before,
 .cart-footer__wrapper:not(.cart-footer__wrapper.is-empty)::before,
 .main-page__wrapper:before,
-.template-404:before {
+.template-404:before,
+.customer:before {
     content: '';
     position: absolute;
     top: 0;
@@ -440,15 +442,15 @@ h1,h2,h3,h4,h5,div,p,button,.buy__button{
     align-items: center;
 
     background: var(--button-gradient);
-    border-radius: 15px;
-    padding: 11px 18px;
-    box-shadow: var(--button-drop-shadow);
+    border-radius: 15px !important;
+    padding: 11px 18px !important;
+    box-shadow: var(--button-drop-shadow) !important;
 
     font-size: 16px;
     line-height: 22px;
-    color: var(--white);
+    color: var(--white) !important;
 
-    transition: all ease-out 0.2s;
+    transition: all ease-out 0.2s !important;
 }
 
 .button-homemaid:hover {
@@ -1112,11 +1114,12 @@ details[open] .modal-overlay::after {
 }
 
 .field-homemaid input,
-.field-homemaid textarea {
+.field-homemaid textarea,
+.select-homemaid select {
     color: var(--text-color) !important;
-    background-color: var(--background-color) !important;
-    transition: all .3s;
-    border-radius: 6px;
+    background-color: var(--background-color-1) !important;
+    transition: all .3s !important;
+    border-radius: 6px !important;
 }
 
 .field-homemaid input:focus-visible,
@@ -1125,18 +1128,63 @@ details[open] .modal-overlay::after {
 }
 
 .field-homemaid input:hover,
-.field-homemaid textarea:hover {
+.field-homemaid textarea:hover,
+.select-homemaid select:hover {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .field-homemaid input:focus,
-.field-homemaid textarea:focus {
+.field-homemaid textarea:focus,
+.select-homemaid select:focus {
     box-shadow: var(--element-drop-shadow);
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius) !important;
 }
 
-.field__label {
+.field__label,
+.field-homemaid label,
+.checkbox-homemaid label {
     color: var(--text-color) !important;
+}
+
+.checkbox-homemaid {
+    position: relative;
+}
+
+.checkbox-homemaid label {
+	position: relative;
+	padding-left: 24px;
+	margin-left: -9px;
+	z-index: 5;
+}
+
+.checkbox-homemaid input[type="checkbox"] {
+    appearance: none;
+}
+
+.checkbox-homemaid .checkbox-homemaid__checkbox {
+	position: absolute;
+	top: 49%;
+	left: 0;
+	width: 16px;
+	height: 16px;
+	background: var(--background-color-1);
+	border-radius: 5px;
+	transform: translateY(-50%);
+}
+
+.checkbox-homemaid input[type="checkbox"]:checked + .checkbox-homemaid__checkbox {
+    background: var(--color-base-accent-1);
+}
+
+.checkbox-homemaid input[type="checkbox"]:checked + .checkbox-homemaid__checkbox::before {
+	content: "";
+	position: absolute;
+	top: 1px;
+	left: 50%;
+	width: 12px;
+	height: 16px;
+	background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxNiAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCiAgICA8cGF0aCBkPSJNMSA3LjM2MzY0TDQuMDM1NTkgMTAuMzIwNEM0LjQyMzg4IDEwLjY5ODYgNS4wNDI3OSAxMC42OTg2IDUuNDMxMDggMTAuMzIwNEwxNSAxIg0KICAgIHN0cm9rZT0iY3VycmVudENvbG9yIg0KICAgIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjFweCIvPg0KPC9zdmc+);
+	transform: translate(-50%);
 }
 
 .field__button {
@@ -1144,7 +1192,7 @@ details[open] .modal-overlay::after {
 }
 
 .predictive-search {
-    background-color: var(--background-color) !important;
+    background-color: var(--background-color-1) !important;
 }
 
 .predictive-search--header {
