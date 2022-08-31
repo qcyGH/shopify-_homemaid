@@ -1306,7 +1306,7 @@ details[open] .modal-overlay::after {
 
 .cart-notification {
     border-radius: 0 0 10px 10px !important;
-    background: var(--white-1) !important;
+    background: var(--background-color-1) !important;
     box-shadow: var(--element-drop-shadow) !important;
     position: relative;
 }
@@ -1318,8 +1318,12 @@ details[open] .modal-overlay::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--white-1);
+    background: var(--background-color-1);
     z-index: -1;
+}
+
+.cart-notification__heading {
+    color: var(--text-color) !important;
 }
 
 .cart-notification__links > * {
@@ -1327,6 +1331,7 @@ details[open] .modal-overlay::after {
 }
 
 .cart-notification__links > .link {
+    color: var(--text-color);
 	margin-top: 16px !important;
 }
 
@@ -1358,7 +1363,7 @@ details[open] .modal-overlay::after {
     left: 50%;
     top: -8px;
     transform: translate(-50%);
-    background: var(--white);
+    background: var(--background-color);
     border-radius: var(--border-radius);
     box-shadow: var(--element-drop-shadow);
     z-index: -1;
