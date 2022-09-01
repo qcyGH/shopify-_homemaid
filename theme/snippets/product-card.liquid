@@ -2,9 +2,9 @@
     <div class="slide__inner">
       <div style="overflow: hidden;">
         <a class="slide__image" style="display: block; overflow: hidden; border-radius: 10px 10px 0 0;" href="{{ product.url }}" target="_blank" rel="noopener noreferrer">
-          <img src="{{ product.featured_image | img_url: 'master' }}">
+          <img src="{{ product.featured_image | img_url: '480x' }}">
           {%- if product.media[1] != nil and show_second_image -%}
-            <img class="slide__image_hover" src="{{ product.media[1] | img_url: 'master' }}">
+            <img class="slide__image_hover" src="{{ product.media[1] | img_url: '480x' }}">
           {% endif %}
           <div class="slide__image_favorite favorite">
             <span class="icon__favorite_light favorite__button">{% render 'icon-favorite' %}</span>
